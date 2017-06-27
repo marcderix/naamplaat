@@ -18,13 +18,23 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$firstname = preg_replace($pattern,'', htmlspecialchars($_POST["firstname"]));
 	$lastname = preg_replace($pattern,'', htmlspecialchars($_POST["lastname"]));
 
+	// voeg voornaam en achternaam samen tot volledige naam, maak er een array van.
 	$fullname  = $firstname.$lastname;
 	$nameArray = str_split($fullname);
+	$alphabet = range('A','Z');
 
 	 print_r($nameArray);
 
-	 foreach ($nameArray as $character) {
-		 echo '<br>We hebben een '. $character;
+	 // loop door de volledige naam array heen
+	 foreach ($nameArray as $index => $character) {
+		echo '<br>Dit is de ' . $index . 'e letter in de volledige naam <br>';
+		// $UpperChar = uppercase van $character
+		$UpperChar = ucfirst($character);;
+		// isUppercase = is $UpperChar gelijk aan $character?
+		$isUpperCase = $UpperChar === $character;
+		// indexInAlphabet = zoek in alfabet naar dit karaker
+		$indexInAlphabet = array_search($UpperChar, $alphabet);
+		echo 'Dit is de ' . $indexInAlphabet . 'e letter in het alfabet <br><br>';
 	 }
 }
 ?>
